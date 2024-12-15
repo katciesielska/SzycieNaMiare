@@ -1,6 +1,6 @@
 ﻿namespace SzycieNaMiare.Models
 {
-    public class Garment
+    public class GarmentType
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -10,11 +10,11 @@ using SzycieNaMiare.Models;
 
 namespace SzycieNaMiare.Controllers
 {
-    public class GarmentsController : Controller
+    public class GarmentTypesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public GarmentsController(ApplicationDbContext context)
+        public GarmentTypesController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace SzycieNaMiare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Garment garmentType)
+        public async Task<IActionResult> Create([Bind("Id,Name")] GarmentType garmentType)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace SzycieNaMiare.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Garment garmentType)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] GarmentType garmentType)
         {
             if (id != garmentType.Id)
             {
