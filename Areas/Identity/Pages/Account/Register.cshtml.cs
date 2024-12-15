@@ -81,6 +81,11 @@ namespace SzycieNaMiare.Areas.Identity.Pages.Account
 
             [Required]
             [EmailAddress]
+            [Display(Name = "Nazwisko")]
+            public string Surname { get; set; }
+
+            [Required]
+            [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
