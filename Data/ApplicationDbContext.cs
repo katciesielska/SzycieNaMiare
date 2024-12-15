@@ -13,5 +13,6 @@ namespace SzycieNaMiare.Data
         public DbSet<SzycieNaMiare.Models.GarmentType> GarmentType { get; set; } = default!;
         public DbSet<SzycieNaMiare.Models.Session> Session { get; set; } = default!;
         public DbSet<SzycieNaMiare.Models.Measurement> Measurement { get; set; } = default!;
+        public DbSet<SzycieNaMiare.Models.Order> Order { get; set; } = default!;
     }
 }

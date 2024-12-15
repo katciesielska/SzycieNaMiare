@@ -1,5 +1,5 @@
 * {
-    color: #402E24;
+    color: #733934;
     font-family: 'Poppins';
 }
 
@@ -37,4 +37,6 @@ body {
 
 footer {
     background-color: #F2E6D8;
+    color: #733934;
+    text-shadow: 2px;
 }

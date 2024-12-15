@@ -6,3 +6,7 @@ body {
     background-image: url('../images/background.jpg');
     background-position:center;
 }
+
+button {
+    color: #402E24;
+}

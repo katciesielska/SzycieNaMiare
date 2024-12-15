@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,23 +10,23 @@ using SzycieNaMiare.Models;
 
 namespace SzycieNaMiare.Controllers
 {
-    [Authorize]
-    public class MeasurementsController : Controller
+    public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public MeasurementsController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Measurements
+        // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Measurement.ToListAsync());
+            var applicationDbContext = _context.Order.Include(o => o.Measurement).Include(o => o.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Measurements/Details/5
+        // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,41 +34,45 @@ namespace SzycieNaMiare.Controllers
                 return NotFound();
             }
 
-            var measurement = await _context.Measurement
+            var order = await _context.Order
+                .Include(o => o.Measurement)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (measurement == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(measurement);
+            return View(order);
         }
 
-        // GET: Measurements/Create
+        // GET: Orders/Create
         public IActionResult Create()
         {
-
-
+            ViewData["MeasurementId"] = new SelectList(_context.Measurement, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Email");
             return View();
         }
 
-        // POST: Measurements/Create
+        // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Height,NeckCircumference,ShouldersWidth,WristCircumference,ChestCircumference,WaistCircumference,HipsCircumference,TighCircumference,AnkleCircumference,UserId")] Measurement measurement)
+        public async Task<IActionResult> Create([Bind("Id,UserId,MeasurementId,OrderDate,Status")] Order order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(measurement);
+                _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(measurement);
+            ViewData["MeasurementId"] = new SelectList(_context.Measurement, "Id", "Id", order.MeasurementId);
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Email", order.UserId);
+            return View(order);
         }
 
-        // GET: Measurements/Edit/5
+        // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,22 +80,24 @@ namespace SzycieNaMiare.Controllers
                 return NotFound();
             }
 
-            var measurement = await _context.Measurement.FindAsync(id);
-            if (measurement == null)
+            var order = await _context.Order.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
-            return View(measurement);
+            ViewData["MeasurementId"] = new SelectList(_context.Measurement, "Id", "Id", order.MeasurementId);
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Email", order.UserId);
+            return View(order);
         }
 
-        // POST: Measurements/Edit/5
+        // POST: Orders/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Height,NeckCircumference,ShouldersWidth,WristCircumference,ChestCircumference,WaistCircumference,HipsCircumference,TighCircumference,AnkleCircumference,UserId")] Measurement measurement)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,MeasurementId,OrderDate,Status")] Order order)
         {
-            if (id != measurement.Id)
+            if (id != order.Id)
             {
                 return NotFound();
             }
@@ -101,12 +106,12 @@ namespace SzycieNaMiare.Controllers
             {
                 try
                 {
-                    _context.Update(measurement);
+                    _context.Update(order);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MeasurementExists(measurement.Id))
+                    if (!OrderExists(order.Id))
                     {
                         return NotFound();
                     }
@@ -117,10 +122,12 @@ namespace SzycieNaMiare.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(measurement);
+            ViewData["MeasurementId"] = new SelectList(_context.Measurement, "Id", "Id", order.MeasurementId);
+            ViewData["UserId"] = new SelectList(_context.Set<User>(), "Id", "Email", order.UserId);
+            return View(order);
         }
 
-        // GET: Measurements/Delete/5
+        // GET: Orders/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,34 +135,36 @@ namespace SzycieNaMiare.Controllers
                 return NotFound();
             }
 
-            var measurement = await _context.Measurement
+            var order = await _context.Order
+                .Include(o => o.Measurement)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (measurement == null)
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return View(measurement);
+            return View(order);
         }
 
-        // POST: Measurements/Delete/5
+        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var measurement = await _context.Measurement.FindAsync(id);
-            if (measurement != null)
+            var order = await _context.Order.FindAsync(id);
+            if (order != null)
             {
-                _context.Measurement.Remove(measurement);
+                _context.Order.Remove(order);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MeasurementExists(int id)
+        private bool OrderExists(int id)
         {
-            return _context.Measurement.Any(e => e.Id == id);
+            return _context.Order.Any(e => e.Id == id);
         }
     }
 }
