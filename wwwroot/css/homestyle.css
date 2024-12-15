@@ -8,5 +8,8 @@ body {
 }
 
 button {
-    color: #402E24;
+    width: 10 em;
+    height: 4 em;
+    background-color: #402E24;
+    border-radius: 3px;
 }
