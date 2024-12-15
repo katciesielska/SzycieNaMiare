@@ -1,0 +1,78 @@
+﻿@model SzycieNaMiare.Models.Measurement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Measurement</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NeckCircumference)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NeckCircumference)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShouldersWidth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShouldersWidth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WristCircumference)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WristCircumference)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChestCircumference)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChestCircumference)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WaistCircumference)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WaistCircumference)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HipsCircumference)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HipsCircumference)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TighCircumference)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TighCircumference)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AnkleCircumference)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AnkleCircumference)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

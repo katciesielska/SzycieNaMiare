@@ -1,0 +1,79 @@
+﻿@model SzycieNaMiare.Models.Measurement
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Measurement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Height" class="control-label"></label>
+                <input asp-for="Height" class="form-control" />
+                <span asp-validation-for="Height" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NeckCircumference" class="control-label"></label>
+                <input asp-for="NeckCircumference" class="form-control" />
+                <span asp-validation-for="NeckCircumference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShouldersWidth" class="control-label"></label>
+                <input asp-for="ShouldersWidth" class="form-control" />
+                <span asp-validation-for="ShouldersWidth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WristCircumference" class="control-label"></label>
+                <input asp-for="WristCircumference" class="form-control" />
+                <span asp-validation-for="WristCircumference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChestCircumference" class="control-label"></label>
+                <input asp-for="ChestCircumference" class="form-control" />
+                <span asp-validation-for="ChestCircumference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WaistCircumference" class="control-label"></label>
+                <input asp-for="WaistCircumference" class="form-control" />
+                <span asp-validation-for="WaistCircumference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HipsCircumference" class="control-label"></label>
+                <input asp-for="HipsCircumference" class="form-control" />
+                <span asp-validation-for="HipsCircumference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TighCircumference" class="control-label"></label>
+                <input asp-for="TighCircumference" class="form-control" />
+                <span asp-validation-for="TighCircumference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnkleCircumference" class="control-label"></label>
+                <input asp-for="AnkleCircumference" class="form-control" />
+                <span asp-validation-for="AnkleCircumference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

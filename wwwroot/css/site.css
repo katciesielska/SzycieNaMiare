@@ -1,3 +1,8 @@
+* {
+    color: #402E24;
+    font-family: 'Poppins';
+}
+
 html {
   font-size: 14px;
 }
@@ -19,4 +24,17 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+.logo{
+    width: 4em;
+    height: auto;
+}
+
+.bg-white {
+    background-color: #F2E6D8;
+}
+
+footer {
+    background-color: #F2E6D8;
 }

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<SzycieNaMiare.Models.Measurement>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Moje wymiary</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NeckCircumference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShouldersWidth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WristCircumference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChestCircumference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WaistCircumference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HipsCircumference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TighCircumference)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnkleCircumference)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NeckCircumference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShouldersWidth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WristCircumference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChestCircumference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WaistCircumference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HipsCircumference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TighCircumference)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnkleCircumference)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <button><a asp-action="Create">Dodaj swoje wymiary</a></button>
+    
+</p>
